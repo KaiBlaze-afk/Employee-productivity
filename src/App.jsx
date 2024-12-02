@@ -3,8 +3,6 @@ import { BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-do
 import Login from './Login';
 import Register from './Register';
 import Dashboard from './Dashboard';
-// import { useRecoilState } from 'recoil';
-// import { taskListState } from './store/taskList';
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
