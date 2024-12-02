@@ -11,7 +11,7 @@ const EmployeeList = ({ employees }) => {
         {/* Map through the array of employees and render an EmployeeCard for each */}
         {employees.map((employee, index) => {
           // Manually assigning values to match the structure expected by the EmployeeCard
-          const imageUrl = `http://localhost:3001/${employee.email.replace(
+          const imageUrl = `https://employee-productivity.glitch.me/uploads/${employee.email.replace(
             /[^a-zA-Z0-9]/g,
             ""
           )}.jpg`;

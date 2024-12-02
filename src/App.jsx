@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom';
 import Login from './Login';
-import Register from './signup';
+import Register from './Register';
 import Dashboard from './Dashboard';
 // import { useRecoilState } from 'recoil';
 // import { taskListState } from './store/taskList';

@@ -34,7 +34,7 @@ const LoginPage = ({ setIsAuthenticated }) => {
       setPasswordError(true);
     } else {
       axios
-        .post("http://localhost:3001/login", { email, password })
+        .post("https://employee-productivity.glitch.me/login", { email, password })
         .then((result) => {
           if (!result.data.accessToken) {
             setError("Email or Password incorrect!");

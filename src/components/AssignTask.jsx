@@ -125,7 +125,7 @@ const AssignTask = ({ userInfo, employees, fetchDashboardData }) => {
       console.log(newTaskData);
       console.log(taskLists);
       // Send the task to the server
-      const response = await fetch("http://localhost:3001/task", {
+      const response = await fetch("https://employee-productivity.glitch.me/task", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
