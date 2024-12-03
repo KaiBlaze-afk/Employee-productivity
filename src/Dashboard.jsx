@@ -22,7 +22,7 @@ import ProfileCard from "./components/ProfileCard";
 import AdminDashboardGraphs from "./components/AdminDashboardGraphs";
 import EmployeeList from "./components/EmployeeList";
 
-const API_BASE_URL = "https://employee-productivity.glitch.me/register";
+const API_BASE_URL = "https://employee-productivity.glitch.me/";
 
 const Dashboard = () => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
