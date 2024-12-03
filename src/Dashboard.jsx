@@ -180,7 +180,7 @@ const Dashboard = () => {
 
   console.log(employees);
   return (
-    <div className="h-screen bg-gray-50 relative">
+    <div className="h-[100vh] bg-gray-50 relative">
       {/* Feedback Message */}
       {message.text && (
         <div
@@ -213,7 +213,7 @@ const Dashboard = () => {
           />
         </div>
 
-        <div className="col-span-4 bg-white ">
+        <div className="col-span-4 h-[100vh] bg-white ">
           {userInfo.role === "admin" ? (
             <>
               {graphView && !employeeView && (
@@ -250,7 +250,7 @@ const Dashboard = () => {
       </button>
 
       <div
-        className={`fixed top-0 right-0 h-full bg-white shadow-lg transform ${
+        className={`fixed top-0 right-0 h-[100vh] bg-white shadow-lg transform ${
           showAssignTask ? "translate-x-0" : "translate-x-full"
         } transition-transform duration-300 z-40 w-1/3`}
       >
