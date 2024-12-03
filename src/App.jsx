@@ -1,24 +1,26 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Login from './Login';
 import Register from './Register';
 import Dashboard from './Dashboard';
-// import { useRecoilState } from 'recoil';
-// import { taskListState } from './store/taskList';
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  // const [taskList, setTaskLIst] = useRecoilState(taskListState)
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
-    // setTaskLIst()
-    setIsAuthenticated(!!token);
+    setIsAuthenticated(!!token); // Convert the token to a boolean (true if exists, false otherwise)
   }, []);
 
   return (
     <Routes>
-      <Route path="/" element={<Navigate to={isAuthenticated ? '/dashboard' : '/login'} replace />} />
+      {/* Root route */}
+      <Route
+        path="/"
+        element={<Navigate to={isAuthenticated ? '/dashboard' : '/login'} replace />}
+      />
+      
+      {/* Specific routes */}
       <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
       <Route path="/register" element={<Register />} />
       <Route
@@ -31,6 +33,8 @@ const App = () => {
           )
         }
       />
+
+      {/* Wildcard route */}
       <Route
         path="*"
         element={<Navigate to={isAuthenticated ? '/dashboard' : '/login'} replace />}
