@@ -180,7 +180,7 @@ const Dashboard = () => {
 
   console.log(employees);
   return (
-    <div className="min-h-screen bg-gray-50 relative">
+    <div className="h-screen bg-gray-50 relative">
       {/* Feedback Message */}
       {message.text && (
         <div
@@ -194,7 +194,7 @@ const Dashboard = () => {
         </div>
       )}
 
-      <div className="grid grid-cols-5">
+      <div className="grid grid-cols-5 h-[100vh]">
         <div className="col-span-1 bg-white rounded-lg">
           <ProfileCard
             email={userInfo.email}
