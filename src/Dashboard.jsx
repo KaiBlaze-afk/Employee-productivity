@@ -251,7 +251,7 @@ const Dashboard = () => {
       <div
         className={`fixed top-0 right-0 h-full bg-white shadow-lg transform ${
           showAssignTask ? "translate-x-0" : "translate-x-full"
-        } transition-transform duration-300 z-40 w-1/3`}
+        } transition-transform duration-300 z-40 md:w-1/3 lg:w-1/3 w-full`}
       >
         <AssignTask
           userInfo={userInfo}
