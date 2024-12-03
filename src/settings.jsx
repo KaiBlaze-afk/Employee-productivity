@@ -7,7 +7,7 @@ const Settings = () => {
   useEffect(() => {
     const accessToken = localStorage.getItem("Diary_accessToken");
     axios
-      .get("http://employee-productivity.glitch.me", {
+      .get("https://employee-productivity.glitch.me", {
         headers: {
           Authorization: `Bearer ${accessToken}`
         },

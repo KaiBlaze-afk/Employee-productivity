@@ -17,7 +17,7 @@ function ProfileCard({
   employeeView,
 }) {
   const navigate = useNavigate();
-  const imageUrl = `http://employee-productivity.glitch.me/${email.replace(
+  const imageUrl = `https://employee-productivity.glitch.me/${email.replace(
     /[^a-zA-Z0-9]/g,
     ""
   )}.jpg`;
@@ -35,8 +35,8 @@ function ProfileCard({
           alt="Profile Picture"
           className="w-24 h-24 rounded-full border-4 border-indigo-600 shadow-lg object-cover hover:scale-105 transition-transform duration-300"
           onError={(e) => {
-            if (e.target.src !== "http://employee-productivity.glitch.me/user.png") {
-              e.target.src = "http://employee-productivity.glitch.me/user.png";
+            if (e.target.src !== "https://employee-productivity.glitch.me/user.png") {
+              e.target.src = "https://employee-productivity.glitch.me/user.png";
             }
           }}
         />
