@@ -193,8 +193,8 @@ const Dashboard = () => {
         </div>
       )}
 
-      <div className="grid grid-cols-5">
-        <div className="col-span-1 bg-white rounded-lg">
+      <div className="md:grid md:grid-cols-5 lg:grid lg:grid-cols-5">
+        <div className="lg:col-span-1 md:col-span-1 bg-white rounded-lg">
           <ProfileCard
             email={userInfo.email}
             name={userInfo.username}

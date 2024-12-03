@@ -15,9 +15,7 @@ const AdminTaskView = ({ allTasks: initialTasks, adminEmail, removeTask }) => {
   const otherTasks = allTasks.filter((task) => task.assignedby !== adminEmail);
 
   const handleRemoveTask = (taskId) => {
-    // Call the removeTask function provided via props
     removeTask(taskId);
-    // Remove task from the local state
     setAllTasks((prevTasks) => prevTasks.filter((task) => task._id !== taskId));
   };
 
