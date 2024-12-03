@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { FaPlus, FaCheck } from "react-icons/fa";
-import MicroPhoneButton from "./MicroPhoneButton";
+import MicrophoneButton from "./MicrophoneButton";
 import { useRecoilState } from "recoil";
 import { allTasksState } from "../store/taskList";
 import { isListeningState, voiceState } from "../store/voiceState";
@@ -169,7 +169,7 @@ const AssignTask = ({ userInfo, employees, fetchDashboardData }) => {
     <div className="bg-gradient-to-r from-indigo-100 via-blue-100 to-indigo-200 min-h-screen max-h-screen shadow-lg p-8 max-w-2xl mx-auto transition-all ease-in-out transform">
       <h3 className="text-2xl font-thin text-gray-800 mb-2">Assign Task</h3>
 
-      <MicroPhoneButton onTranscriptReceived={handleTranscript} />
+      <MicrophoneButton onTranscriptReceived={handleTranscript} />
 
       {confirmationMessage && (
         <div className="mb-2 p-2 text-center text-white bg-green-500 rounded-lg shadow-lg transition-transform transform">

@@ -4,7 +4,7 @@ import { FaMicrophone, FaMicrophoneAltSlash } from "react-icons/fa";
 import { useRecoilState } from "recoil";
 import { isListeningState, voiceState } from "../store/voiceState";
 
-const MicroPhoneButton = () => {
+const MicrophoneButton = () => {
   const { startListening, stopListening } = useSpeech();
   const [isListening, setIsListening] = useRecoilState(isListeningState);
   const [transcript, ] = useRecoilState(voiceState);
@@ -111,4 +111,4 @@ const MicroPhoneButton = () => {
   );
 };
 
-export default MicroPhoneButton;
+export default MicrophoneButton;
