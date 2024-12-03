@@ -65,7 +65,7 @@ const TasksList = ({ userInfo, removeTask, handleMarkAsDone }) => {
   if (!taskList) return;
 
   return (
-    <div className="bg-white rounded-lg pt-3 px-6 overflow-hidden">
+    <div className="bg-white h-[100vh] rounded-lg pt-3 px-6 overflow-hidden">
       <h3 className="text-2xl font-thin text-gray-800">Task Assigned to Me</h3>
 
       {/* Tasks Assigned to Me */}
