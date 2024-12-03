@@ -65,12 +65,12 @@ const TasksList = ({ userInfo, removeTask, handleMarkAsDone }) => {
   if (!taskList) return;
 
   return (
-    <div className="bg-white h-[100vh] rounded-lg pt-3 px-6 overflow-hidden">
+    <div className="bg-white rounded-lg pt-3 px-6 max-h-[100vh] overflow-y-auto">
       <h3 className="text-2xl font-thin text-gray-800">Task Assigned to Me</h3>
 
       {/* Tasks Assigned to Me */}
       <div className="mt-2">
-        <div className="overflow-x-auto max-h-80 rounded-lg mt-2">
+        <div className="overflow-x-auto max-h-[42vh] rounded-lg mt-2">
           <table className="min-w-full bg-white shadow-lg rounded-lg overflow-hidden table-auto">
             <thead className="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
               <tr>
@@ -153,7 +153,7 @@ const TasksList = ({ userInfo, removeTask, handleMarkAsDone }) => {
         <h4 className="text-2xl font-thin text-gray-800">
           Task Assigned by Me
         </h4>
-        <div className="overflow-x-auto max-h-80 rounded-lg mt-2">
+        <div className="overflow-x-auto max-h-[42vh] rounded-lg mt-2">
           <table className="min-w-full bg-white shadow-lg rounded-lg overflow-hidden table-auto">
             <thead className="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
               <tr>

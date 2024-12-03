@@ -22,13 +22,13 @@ function ProfileCard({
     ""
   )}.jpg`;
 
-   const handleLogout = () => {
+  const handleLogout = () => {
     localStorage.removeItem("accessToken");
     navigate("/login");
   };
 
   return (
-    <div className=" bg-gradient-to-br from-purple-100 via-indigo-50 to-indigo-200   flex flex-col items-center justify-center p-6  transition-all h-screen">
+    <div className="flex flex-col items-center justify-center bg-gradient-to-br from-purple-100 via-indigo-50 to-indigo-200 p-6 h-full min-h-screen transition-all">
       <div className="flex items-center justify-center mb-4">
         <img
           src={imageUrl}
@@ -43,16 +43,16 @@ function ProfileCard({
       </div>
 
       {/* Name and Role */}
-      <h2 className="text-2xl font-semibold text-gray-800 mb-1 transition-transform duration-300 transform hover:text-indigo-600">
+      <h2 className="text-2xl font-semibold text-gray-800 mb-1 hover:text-indigo-600 transition-all">
         {name || "Name"}
       </h2>
       <p className="text-indigo-600 text-md mb-3">{role || "Role"}</p>
 
       {/* Details */}
-      <div className="bg-indigo-100 p-4 rounded-lg shadow-inner mb-4">
+      <div className="bg-indigo-100 p-4 rounded-lg shadow-inner mb-4 w-full max-w-md">
         <p className="text-gray-700 text-sm mb-1">
-          <span className="font-semibold text-indigo-700">Email:</span>{" "}
-          {email || "example@domain.com"}
+          <span className=" font-semibold text-indigo-700">Email:</span>{" "}
+          <span className="break-words">{email || "example@domain.com"}</span>
         </p>
         <p className="text-gray-700 text-sm mb-1">
           <span className="font-semibold text-indigo-700">Department:</span>{" "}
@@ -69,14 +69,14 @@ function ProfileCard({
       </div>
 
       {/* Description */}
-      <p className="text-gray-700 text-sm leading-relaxed mb-4">
+      <p className="text-gray-700 text-sm leading-relaxed mb-4 w-full max-w-md">
         {description ||
           "A passionate individual dedicated to excellence in the field of education and personal development."}
       </p>
 
       {/* Task Counts */}
       {role === "user" && (
-        <div className="bg-white p-4 rounded-lg shadow-inner mb-4">
+        <div className="bg-white p-4 rounded-lg shadow-inner mb-4 w-full max-w-md">
           <h3 className="text-md font-semibold text-indigo-700 mb-3">Tasks</h3>
           <div className="mb-3">
             <h4 className="text-indigo-600 font-medium text-sm mb-1">
@@ -96,11 +96,12 @@ function ProfileCard({
           </div>
         </div>
       )}
+
+      {/* Admin Controls */}
       {role === "admin" && (
-        <>
-        <div className="flex flex-col items-center gap-2 p-6 bg-gradient-to-b from-blue-50 to-blue-100 rounded-lg w-64 mx-auto">
+        <div className="flex flex-col items-center gap-3 p-4  w-full max-w-md">
           <button
-            className={`w-full px-8 py-3 font-semibold rounded-lg transition-all duration-300 ${
+            className={`w-full px-8 py-2 font-semibold rounded-3xl transition-all duration-300 ${
               !employeeView && !graphView
                 ? 'bg-gradient-to-r from-blue-400 to-blue-500 text-white'
                 : 'border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white'
@@ -113,10 +114,10 @@ function ProfileCard({
             Tasks Lists
           </button>
           <button
-            className={`w-full px-8 py-3 font-semibold rounded-lg transition-all duration-300 ${
+            className={`w-full px-8 py-2 font-semibold rounded-3xl transition-all duration-300 ${
               employeeView
-              ? 'bg-gradient-to-r from-purple-400 to-purple-500 text-white'
-              : 'border-2 border-purple-500 text-purple-500 hover:bg-purple-500 hover:text-white'
+                ? 'bg-gradient-to-r from-purple-400 to-purple-500 text-white'
+                : 'border-2 border-purple-500 text-purple-500 hover:bg-purple-500 hover:text-white'
             }`}
             onClick={() => {
               setEmployeeView(true);
@@ -126,9 +127,9 @@ function ProfileCard({
             Employees
           </button>
           <button
-            className={`w-full px-8 py-3 font-semibold rounded-lg transition-all duration-300 ${
+            className={`w-full px-8 py-2 font-semibold rounded-3xl transition-all duration-300 ${
               graphView
-              ? 'bg-gradient-to-r from-green-400 to-green-500 text-white'
+                ? 'bg-gradient-to-r from-green-400 to-green-500 text-white'
                 : 'border-2 border-green-500 text-green-500 hover:bg-green-500 hover:text-white'
             }`}
             onClick={() => {
@@ -139,14 +140,13 @@ function ProfileCard({
             Graphs
           </button>
         </div>
-      </>
-      
       )}
+
       {/* Logout Button */}
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center mt-4 w-fit max-w-md">
         <button
           onClick={handleLogout}
-          className="px-8 py-2 bg-red-500 text-white font-semibold rounded-full shadow-md hover:bg-red-700 hover:shadow-lg transition-all duration-300"
+          className="px-16 py-2 bg-red-500 text-white font-semibold rounded-full shadow-md hover:bg-red-700 hover:shadow-lg transition-all duration-300 w-full"
         >
           Logout
         </button>

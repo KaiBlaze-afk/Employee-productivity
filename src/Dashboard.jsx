@@ -180,8 +180,7 @@ const Dashboard = () => {
 
   console.log(employees);
   return (
-    <div className="h-[100vh] bg-gray-50 relative">
-      {/* Feedback Message */}
+    <div className="min-h-[100vh] bg-gray-50 relative">
       {message.text && (
         <div
           className={`fixed top-4 left-1/2 transform -translate-x-1/2 p-4 rounded-lg shadow-lg z-50 ${
@@ -194,7 +193,7 @@ const Dashboard = () => {
         </div>
       )}
 
-      <div className="grid grid-cols-5 h-[100vh]">
+      <div className="grid grid-cols-5">
         <div className="col-span-1 bg-white rounded-lg">
           <ProfileCard
             email={userInfo.email}
@@ -213,7 +212,7 @@ const Dashboard = () => {
           />
         </div>
 
-        <div className="col-span-4 h-[100vh] bg-white ">
+        <div className="col-span-4 bg-white ">
           {userInfo.role === "admin" ? (
             <>
               {graphView && !employeeView && (
@@ -250,7 +249,7 @@ const Dashboard = () => {
       </button>
 
       <div
-        className={`fixed top-0 right-0 h-[100vh] bg-white shadow-lg transform ${
+        className={`fixed top-0 right-0 h-full bg-white shadow-lg transform ${
           showAssignTask ? "translate-x-0" : "translate-x-full"
         } transition-transform duration-300 z-40 w-1/3`}
       >

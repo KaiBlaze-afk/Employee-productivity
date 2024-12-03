@@ -22,12 +22,12 @@ const AdminTaskView = ({ allTasks: initialTasks, adminEmail, removeTask }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg pt-4 px-6 overflow-hidden">
+    <div className="bg-white rounded-lg pt-4 px-6 max-h-[100vh] overflow-y-auto">
       
-      {/* Tasks Assigned by Admin */}
       <h3 className="text-3xl font-thin text-gray-800 mb-1">Tasks Assigned by Admin</h3>
+      {/* Tasks Assigned by Admin */}
       {adminAssignedTasks.length > 0 ? (
-        <div className="overflow-x-auto max-h-80 rounded-lg">
+        <div className="overflow-x-auto max-h-[42vh] rounded-lg">
           <table className="min-w-full bg-white shadow-lg rounded-lg overflow-hidden table-auto">
             <thead className="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
               <tr>
@@ -85,7 +85,7 @@ const AdminTaskView = ({ allTasks: initialTasks, adminEmail, removeTask }) => {
       {/* Other Tasks */}
       <h3 className="text-3xl font-thin text-gray-800 mt-2 mb-1">Other Tasks</h3>
       {otherTasks.length > 0 ? (
-        <div className="overflow-x-auto max-h-80 rounded-lg">
+        <div className="overflow-x-auto  max-h-[40vh] rounded-lg">
           <table className="min-w-full bg-white shadow-lg rounded-lg overflow-hidden table-auto">
             <thead className="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
               <tr>

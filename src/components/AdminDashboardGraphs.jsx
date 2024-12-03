@@ -158,7 +158,7 @@ const AdminDashboardGraph = ({ allTasks }) => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 h-screen p-6 bg-gradient-to-r from-teal-400 to-blue-500">
+    <div className="max-h-[100vh] overflow-y-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-6 gap-4 h-[100vh] bg-gradient-to-r from-teal-400 to-blue-500">
       {/* Stacked Bar Graph (Tasks by Assignee) */}
       <div className="bg-white shadow-lg p-6 rounded-lg col-span-2">
         <h3 className="text-2xl font-semibold text-gray-800 mb-4">Tasks by Assignee</h3>

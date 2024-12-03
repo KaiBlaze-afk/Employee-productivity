@@ -166,7 +166,7 @@ const AssignTask = ({ userInfo, employees, fetchDashboardData }) => {
   );
 
   return (
-    <div className="bg-gradient-to-r from-indigo-100 via-blue-100 to-indigo-200 min-h-screen max-h-screen shadow-lg p-8 max-w-2xl mx-auto transition-all ease-in-out transform">
+    <div className="bg-gradient-to-r from-indigo-100 via-blue-100 to-indigo-200 flex flex-col justify-center min-h-screen max-h-screen shadow-lg p-8 max-w-2xl mx-auto transition-all ease-in-out transform">
       <h3 className="text-2xl font-thin text-gray-800 mb-2">Assign Task</h3>
 
       <MicrophoneButton onTranscriptReceived={handleTranscript} />
@@ -178,7 +178,7 @@ const AssignTask = ({ userInfo, employees, fetchDashboardData }) => {
       )}
 
       <textarea
-        className="w-full border border-gray-300 rounded-lg shadow-sm p-4 mb-3 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300"
+        className="w-full border border-gray-300 rounded-lg shadow-sm p-3 mb-3 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300"
         placeholder="Enter task details..."
         value={newTask}
         onChange={(e) => setNewTask(e.target.value)}
@@ -186,7 +186,7 @@ const AssignTask = ({ userInfo, employees, fetchDashboardData }) => {
 
       <input
         type="date"
-        className="w-full border border-gray-300 rounded-lg shadow-sm p-3 mb-3 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300"
+        className="w-full text-sm border border-gray-300 rounded-lg shadow-sm p-2 mb-3 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300"
         value={deadline}
         onChange={(e) => setDeadline(e.target.value)}
       />
@@ -194,7 +194,7 @@ const AssignTask = ({ userInfo, employees, fetchDashboardData }) => {
       <input
         type="text"
         placeholder="Search employees by name or email"
-        className="w-full border border-gray-300 rounded-lg shadow-sm p-3 mb-3 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300"
+        className="w-full border border-gray-300 rounded-lg shadow-sm p-2 mb-3 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
