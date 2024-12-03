@@ -22,7 +22,7 @@ import ProfileCard from "./components/ProfileCard";
 import AdminDashboardGraphs from "./components/AdminDashboardGraphs";
 import EmployeeList from "./components/EmployeeList";
 
-const API_BASE_URL = "https://employee-productivity.glitch.me";
+const API_BASE_URL = "http://localhost:3000";
 
 const Dashboard = () => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
@@ -106,7 +106,7 @@ const Dashboard = () => {
 
       const currentTime = new Date();
       const deadline = new Date(task.deadline);
-      const newStatus = currentTime > deadline ? "Late Submit" : "Done";
+      const newStatus = currentTime > deadline ? "Delayed" : "Done";
 
       const response = await fetch(`${API_BASE_URL}/task/${taskId}`, {
         method: "PUT",
