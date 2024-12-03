@@ -48,7 +48,7 @@ const Register = () => {
     if (image) formData.append("image", image, email); // Use email as the image filename
 
     try {
-      const response = await axios.post("https://employee-productivity.glitch.me/register", formData, {
+      const response = await axios.post("http://employee-productivity.glitch.me/register", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
