@@ -22,7 +22,7 @@ import ProfileCard from "./components/ProfileCard";
 import AdminDashboardGraphs from "./components/AdminDashboardGraphs";
 import EmployeeList from "./components/EmployeeList";
 
-const API_BASE_URL = "http://localhost:3000";
+const API_BASE_URL = "https://employee-productivity.glitch.me/register";
 
 const Dashboard = () => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
@@ -37,7 +37,7 @@ const Dashboard = () => {
   const [showAssignTask, setShowAssignTask] =
     useRecoilState(showAssignTaskState);
   const [graphView, setGraphView] = useRecoilState(graphViewState);
-  const [employeeView, setEmployeeView] = useRecoilState(EmployeeViewState)
+  const [employeeView, setEmployeeView] = useRecoilState(EmployeeViewState);
 
   const navigate = useNavigate();
 
@@ -178,7 +178,7 @@ const Dashboard = () => {
   if (loading) return <LoadingScreen />;
   if (!userInfo) return <LoginPrompt />;
 
-  console.log(employees)
+  console.log(employees);
   return (
     <div className="min-h-screen bg-gray-50 relative">
       {/* Feedback Message */}
@@ -216,7 +216,9 @@ const Dashboard = () => {
         <div className="col-span-4 bg-white ">
           {userInfo.role === "admin" ? (
             <>
-              {graphView && !employeeView && <AdminDashboardGraphs allTasks={allTasks} />}
+              {graphView && !employeeView && (
+                <AdminDashboardGraphs allTasks={allTasks} />
+              )}
               {!graphView && !employeeView && (
                 <AdminTaskView
                   allTasks={allTasks}
@@ -224,7 +226,9 @@ const Dashboard = () => {
                   removeTask={removeTask}
                 />
               )}
-              {!graphView && employeeView && <EmployeeList employees={employees}/>}
+              {!graphView && employeeView && (
+                <EmployeeList employees={employees} />
+              )}
             </>
           ) : (
             <>
