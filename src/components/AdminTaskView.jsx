@@ -10,7 +10,9 @@ const AdminTaskView = ({ allTasks: initialTasks, adminEmail, removeTask }) => {
   }, [initialTasks]);
 
   // Filter tasks assigned by the admin
-  const adminAssignedTasks = allTasks.filter((task) => task.assignedby === adminEmail);
+  const adminAssignedTasks = allTasks.filter(
+    (task) => task.assignedby === adminEmail
+  );
   // Remove admin tasks from the general tasks list
   const otherTasks = allTasks.filter((task) => task.assignedby !== adminEmail);
 
@@ -21,11 +23,63 @@ const AdminTaskView = ({ allTasks: initialTasks, adminEmail, removeTask }) => {
 
   return (
     <div className="bg-white rounded-lg pt-4 px-6 max-h-[100vh] overflow-y-auto">
-      
-      <h3 className="text-3xl font-thin text-gray-800 mb-1">Tasks Assigned by Admin</h3>
       {/* Tasks Assigned by Admin */}
-      {adminAssignedTasks.length > 0 ? (
-        <div className="overflow-x-auto max-h-[42vh] rounded-lg">
+      <h3 className="text-3xl font-thin text-gray-800 mb-1">
+        Tasks Assigned by Admin
+      </h3>
+
+      {/* Mobile Card Layout */}
+      <div className="block sm:hidden">
+        {adminAssignedTasks.length > 0 ? (
+          <div className="grid gap-4">
+            {adminAssignedTasks.map((task) => (
+              <div
+                key={task._id}
+                className="bg-gray-100 p-4 rounded-lg shadow-md"
+              >
+                <h4 className="text-lg font-semibold">{task.taskdata}</h4>
+                <p className="text-gray-600">
+                  <strong>Assigned To:</strong> {task.assignedto}
+                </p>
+                <p className="text-gray-600">
+                  <strong>Status:</strong>{" "}
+                  <span
+                    className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                      task.status === "Done"
+                        ? "bg-green-500 text-white"
+                        : task.status === "Delayed"
+                        ? "bg-red-500 text-white"
+                        : "bg-yellow-500 text-white"
+                    }`}
+                  >
+                    {task.status}
+                  </span>
+                </p>
+                <p className="text-gray-600">
+                  <strong>Deadline:</strong>{" "}
+                  {new Date(task.deadline).toLocaleDateString()}
+                </p>
+                <div className="mt-2 text-right">
+                  <button
+                    className="text-red-600 hover:text-red-800 transition-all duration-300"
+                    onClick={() => handleRemoveTask(task._id)}
+                  >
+                    Remove Task
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-center text-gray-500 mt-4">
+            No tasks assigned by admin.
+          </p>
+        )}
+      </div>
+
+      {/* Desktop Table Layout */}
+      <div className="hidden sm:block overflow-x-auto max-h-[42vh] rounded-lg">
+        {adminAssignedTasks.length > 0 ? (
           <table className="min-w-full bg-white shadow-lg rounded-lg overflow-hidden table-auto">
             <thead className="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
               <tr>
@@ -60,12 +114,11 @@ const AdminTaskView = ({ allTasks: initialTasks, adminEmail, removeTask }) => {
                     </span>
                   </td>
                   <td className="px-6 py-4">
-                    {/* Display only the date */}
                     {new Date(task.deadline).toLocaleDateString()}
                   </td>
                   <td className="px-6 py-4 text-center">
                     <button
-                      className="mt-2 text-red-600 hover:text-red-800 transition-all duration-300"
+                      className="text-red-600 hover:text-red-800 transition-all duration-300"
                       onClick={() => handleRemoveTask(task._id)}
                     >
                       Remove Task
@@ -75,15 +128,73 @@ const AdminTaskView = ({ allTasks: initialTasks, adminEmail, removeTask }) => {
               ))}
             </tbody>
           </table>
-        </div>
-      ) : (
-        <p className="text-center text-gray-500 mt-4">No tasks assigned by admin.</p>
-      )}
+        ) : (
+          <p className="text-center text-gray-500 mt-4">
+            No tasks assigned by admin.
+          </p>
+        )}
+      </div>
 
       {/* Other Tasks */}
-      <h3 className="text-3xl font-thin text-gray-800 mt-2 mb-1">Other Tasks</h3>
-      {otherTasks.length > 0 ? (
-        <div className="overflow-x-auto  max-h-[40vh] rounded-lg">
+      <h3 className="text-3xl font-thin text-gray-800 mt-4 mb-1">
+        Other Tasks
+      </h3>
+
+      {/* Mobile Card Layout */}
+      <div className="block sm:hidden">
+        {otherTasks.length > 0 ? (
+          <div className="grid gap-4">
+            {otherTasks.map((task) => (
+              <div
+                key={task._id}
+                className="bg-gray-100 p-4 rounded-lg shadow-md"
+              >
+                <h4 className="text-lg font-semibold">{task.taskdata}</h4>
+                <p className="text-gray-600">
+                  <strong>Assigned By:</strong> {task.assignedby}
+                </p>
+                <p className="text-gray-600">
+                  <strong>Assigned To:</strong> {task.assignedto}
+                </p>
+                <p className="text-gray-600">
+                  <strong>Status:</strong>{" "}
+                  <span
+                    className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                      task.status === "Done"
+                        ? "bg-green-500 text-white"
+                        : task.status === "Delayed"
+                        ? "bg-red-500 text-white"
+                        : "bg-yellow-500 text-white"
+                    }`}
+                  >
+                    {task.status}
+                  </span>
+                </p>
+                <p className="text-gray-600">
+                  <strong>Deadline:</strong>{" "}
+                  {new Date(task.deadline).toLocaleDateString()}
+                </p>
+                <div className="mt-2 text-right">
+                  <button
+                    className="text-red-600 hover:text-red-800 transition-all duration-300"
+                    onClick={() => handleRemoveTask(task._id)}
+                  >
+                    Remove Task
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-center text-gray-500 mt-4">
+            No other tasks available.
+          </p>
+        )}
+      </div>
+
+      {/* Desktop Table Layout */}
+      <div className="hidden sm:block overflow-x-auto max-h-[40vh] rounded-lg">
+        {otherTasks.length > 0 ? (
           <table className="min-w-full bg-white shadow-lg rounded-lg overflow-hidden table-auto">
             <thead className="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
               <tr>
@@ -120,12 +231,11 @@ const AdminTaskView = ({ allTasks: initialTasks, adminEmail, removeTask }) => {
                     </span>
                   </td>
                   <td className="px-6 py-4">
-                    {/* Display only the date */}
                     {new Date(task.deadline).toLocaleDateString()}
                   </td>
                   <td className="px-6 py-4 text-center">
                     <button
-                      className="mt-2 text-red-600 hover:text-red-800 transition-all duration-300"
+                      className="text-red-600 hover:text-red-800 transition-all duration-300"
                       onClick={() => handleRemoveTask(task._id)}
                     >
                       Remove Task
@@ -135,10 +245,12 @@ const AdminTaskView = ({ allTasks: initialTasks, adminEmail, removeTask }) => {
               ))}
             </tbody>
           </table>
-        </div>
-      ) : (
-        <p className="text-center text-gray-500 mt-4">No other tasks available.</p>
-      )}
+        ) : (
+          <p className="text-center text-gray-500 mt-4">
+            No other tasks available.
+          </p>
+        )}
+      </div>
     </div>
   );
 };
