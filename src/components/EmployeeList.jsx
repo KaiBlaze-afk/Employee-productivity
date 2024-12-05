@@ -23,7 +23,7 @@ const EmployeeList = ({ employees }) => {
             subjects: employee.subjects || [],
             description: employee.description || "No description provided",
             email: employee.email || "No email provided",
-            image: imageUrl || "https://via.placeholder.com/150", // Placeholder if no image is provided
+            image: imageUrl || "https://employee-productivity.glitch.me/user.jpg", // Placeholder if no image is provided
           };
 
           return (

@@ -4,10 +4,14 @@ const EmployeeCard = ({ employee }) => {
     <div className="max-w-xs w-full bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
       {/* Profile Image */}
       <img
-        className="w-full h-56 object-cover"
-        src={employee.image}
-        alt={employee.name || "Employee"}
-      />
+  className="w-full h-56 object-cover"
+  src={employee.image || "https://employee-productivity.glitch.me/user.jpg"}
+  alt={employee.name || "Employee"}
+  onError={(e) => {
+    e.target.onerror = null; // Prevent infinite loop if fallback image also fails
+    e.target.src = "https://employee-productivity.glitch.me/user.jpg"; // Fallback image
+  }}
+/>
 
       <div className="p-6">
         {/* Name and Role */}

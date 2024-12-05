@@ -216,7 +216,7 @@ const Dashboard = () => {
           {userInfo.role === "admin" ? (
             <>
               {graphView && !employeeView && (
-                <AdminDashboardGraphs allTasks={allTasks} />
+                <AdminDashboardGraphs allTasks={allTasks} employees={employees} />
               )}
               {!graphView && !employeeView && (
                 <AdminTaskView
