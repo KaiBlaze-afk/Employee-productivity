@@ -26,13 +26,17 @@ ChartJS.register(
   LineElement
 );
 
-const AdminDashboardGraph = ({ allTasks }) => {
-  // Helper function to calculate the difference in days
+const AdminDashboardGraph = ({ allTasks, employees }) => {
+  employees.forEach((emp)=>{
+      console.log(emp)
+  });
+
+
   const getDaysDifference = (date) => {
     const today = new Date();
     const deadline = new Date(date);
     const timeDifference = deadline - today;
-    const daysDifference = timeDifference / (1000 * 3600 * 24); // Convert from milliseconds to days
+    const daysDifference = timeDifference / (1000 * 3600 * 24);
     return daysDifference;
   };
 
@@ -64,36 +68,45 @@ const AdminDashboardGraph = ({ allTasks }) => {
     ],
   };
 
-  // Group tasks by assigned-to person and status for bar graph data
+  const emailToNameMap = employees.reduce((acc, emp) => {
+    acc[emp.email] = emp.username; // Map email to name
+    return acc;
+  }, {});
+
   const assignedToCounts = {};
   allTasks.forEach((task) => {
-    if (!assignedToCounts[task.assignedto]) {
-      assignedToCounts[task.assignedto] = { Assigned: 0, Done: 0, Delayed: 0 };
+    const assigneeName = emailToNameMap[task.assignedto] || task.assignedto; // Default to email if no name found
+
+    if (!assignedToCounts[assigneeName]) {
+      assignedToCounts[assigneeName] = { Assigned: 0, Done: 0, Delayed: 0 };
     }
 
     // Increase the count for the respective status
     if (task.status === 'Done') {
-      assignedToCounts[task.assignedto].Done++;
+      assignedToCounts[assigneeName].Done++;
     } else if (task.status === 'Delayed') {
-      assignedToCounts[task.assignedto].Delayed++;
+      assignedToCounts[assigneeName].Delayed++;
     } else {
-      assignedToCounts[task.assignedto].Assigned++;
+      assignedToCounts[assigneeName].Assigned++;
     }
   });
-  
+
   Object.keys(assignedToCounts).forEach((assignee) => {
-    const totalAssigned = allTasks.filter((task) => task.assignedto === assignee).length;
+    const totalAssigned = allTasks.filter((task) => {
+      const assigneeName = emailToNameMap[task.assignedto] || task.assignedto;
+      return assigneeName === assignee;
+    }).length;
+
     const doneCount = assignedToCounts[assignee].Done;
     const delayedCount = assignedToCounts[assignee].Delayed;
-  
+
     // Ensure "Assigned" reflects tasks neither done nor delayed
     assignedToCounts[assignee].Assigned = totalAssigned - doneCount - delayedCount;
   });
-  
 
-  // Prepare the Stacked Bar Graph data (Tasks by Assignee)
+  // Prepare the Stacked Bar Graph data (Tasks by Assignee using names)
   const barData = {
-    labels: Object.keys(assignedToCounts), // Assignees
+    labels: Object.keys(assignedToCounts), // Assignee names
     datasets: [
       {
         label: 'Assigned',

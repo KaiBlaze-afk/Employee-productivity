@@ -2,8 +2,6 @@
 import EmployeeCard from './EmployeeCard';
 
 const EmployeeList = ({ employees }) => {
-  console.log(employees);
-
   return (
     <div className="max-h-screen overflow-y-auto bg-gradient-to-r from-purple-300 via-indigo-300 to-purple-200 p-6">
       {/* Container for the employee cards */}

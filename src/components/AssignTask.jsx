@@ -122,8 +122,6 @@ const AssignTask = ({ userInfo, employees, fetchDashboardData }) => {
     try {
       // Update the global Recoil state first
       setTaskList((prevTasks) => [newTaskData, ...prevTasks]);
-      console.log(newTaskData);
-      console.log(taskLists);
       // Send the task to the server
       const response = await fetch("https://employee-productivity.glitch.me/task", {
         method: "POST",

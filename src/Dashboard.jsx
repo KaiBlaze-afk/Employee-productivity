@@ -97,11 +97,9 @@ const Dashboard = () => {
   };
 
   const handleMarkAsDone = async (taskId) => {
-    console.log(taskId);
     const token = localStorage.getItem("accessToken");
     try {
       const task = tasksAssignedByUser.find((t) => t._id === taskId);
-      console.log(tasksAssignedByUser);
       if (!task) throw new Error("Task not found");
 
       const currentTime = new Date();
@@ -177,8 +175,6 @@ const Dashboard = () => {
 
   if (loading) return <LoadingScreen />;
   if (!userInfo) return <LoginPrompt />;
-
-  console.log(employees);
   return (
     <div className="min-h-[100vh] bg-gray-50 relative">
       {message.text && (
