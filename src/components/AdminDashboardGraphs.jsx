@@ -26,7 +26,7 @@ ChartJS.register(
   LineElement
 );
 
-const AdminDashboardGraph = ({ allTasks }) => {
+const AdminDashboardGraph = ({ allTasks, employee }) => {
   // Helper function to calculate the difference in days
   const getDaysDifference = (date) => {
     const today = new Date();

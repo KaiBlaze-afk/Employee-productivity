@@ -65,67 +65,85 @@ const TasksList = ({ userInfo, removeTask, handleMarkAsDone }) => {
   if (!taskList) return;
 
   return (
-    <div className="bg-white rounded-lg pt-3 px-6 overflow-hidden">
+    <div className="bg-white rounded-lg pt-3 px-6 max-h-[100vh] overflow-y-auto">
+
       <h3 className="text-2xl font-thin text-gray-800">Task Assigned to Me</h3>
 
       <div className="mt-2">
-        <div className="grid gap-4 sm:table sm:max-h-80 sm:overflow-x-auto sm:rounded-lg mt-2">
-          {/* Render as cards on small screens, tables on larger screens */}
-          {filteredAssignedToMe.length > 0 ? (
-            filteredAssignedToMe.map((task) => (
-              <div
-                key={task._id}
-                className="bg-gray-100 p-4 rounded-lg shadow-md sm:table-row sm:table-auto sm:p-0"
-              >
-                <div className="flex sm:table-cell flex-col sm:flex-row sm:items-center sm:gap-4">
-                  <div className="text-lg font-medium sm:table-cell">
-                    {task.taskdata}
-                  </div>
-                  <div className="text-gray-600 sm:table-cell">
-                    Assigned By: {task.assignedby}
-                  </div>
-                  <div className="sm:table-cell">
-                    <span
-                      className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                        task.status === "Done"
-                          ? "bg-green-500 text-white"
-                          : task.status === "Delayed"
-                          ? "bg-red-500 text-white"
-                          : "bg-yellow-500 text-white"
-                      }`}
-                    >
-                      {task.status}
-                    </span>
-                  </div>
-                  <div className="text-gray-600 sm:table-cell">
-                    {new Date(task.deadline).toLocaleDateString()}
-                  </div>
-                  <div className="flex gap-2 sm:table-cell sm:text-center">
-                    {task.status !== "Done" && task.status !== "Delayed" && (
-                      <button
-                        className="bg-green-500 text-white px-4 py-2 rounded-lg shadow-md hover:scale-105 transform transition-all duration-300"
-                        onClick={() => markAsDone(task)}
+        <div className="overflow-x-auto max-h-[42vh] rounded-lg mt-2">
+          <table className="min-w-full bg-white shadow-lg rounded-lg overflow-hidden table-auto">
+            <thead className="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
+              <tr>
+                <th className="px-6 py-3 text-left">Task</th>
+                <th className="px-6 py-3 text-left">Assigned By</th>
+                <th className="px-6 py-3 text-left">Status</th>
+                <th className="px-6 py-3 text-left">Deadline</th>
+                <th className="px-6 py-3 text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredAssignedToMe.length > 0 ? (
+                filteredAssignedToMe.map((task, index) => (
+                  <tr
+                    key={task._id}
+                    className={`${
+                      index % 2 === 0 ? "bg-gray-50" : "bg-gray-100"
+                    } hover:bg-gray-200 transition-all duration-300`}
+                  >
+                    <td className="px-6 py-4">{task.taskdata}</td>
+                    <td className="px-6 py-4">{task.assignedby}</td>
+                    <td className="px-6 py-4">
+                      <span
+                        className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                          task.status === "Done"
+                            ? "bg-green-500 text-white"
+                            : task.status === "Delayed"
+                            ? "bg-red-500 text-white"
+                            : "bg-yellow-500 text-white"
+                        }`}
                       >
-                        Mark as Done
-                      </button>
-                    )}
-                    {task.assignedby === userInfo.email && (
-                      <button
-                        className="text-red-600 hover:text-red-800 transition-all duration-300"
-                        onClick={() => handleRemoveTask(task._id)}
-                      >
-                        Remove Task
-                      </button>
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))
-          ) : (
-            <div className="text-center text-gray-600">
-              No tasks assigned to me.
-            </div>
-          )}
+                        {task.status}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4">
+                      {/* Show only date without time */}
+                      {new Date(task.deadline).toLocaleDateString()}
+                    </td>
+                    <td className="px-6 py-4 text-center">
+                      {/* Mark as Done Button */}
+                      {task.status !== "Done" &&
+                        task.status !== "Delayed" && (
+                          <button
+                            className="bg-gradient-to-r from-green-400 to-green-600 text-white px-4 py-2 rounded-lg shadow-md hover:scale-105 transform transition-all duration-300"
+                            onClick={() => markAsDone(task)}
+                          >
+                            Mark as Done
+                          </button>
+                        )}
+                      {/* Delete Button */}
+                      {task.assignedby === userInfo.email && (
+                        <button
+                          className="mt-2 text-red-600 hover:text-red-800 transition-all duration-300"
+                          onClick={() => handleRemoveTask(task._id)}
+                        >
+                          Remove Task
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td
+                    colSpan="5"
+                    className="px-6 py-4 text-center text-gray-600"
+                  >
+                    No tasks assigned to me.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
 
@@ -133,54 +151,70 @@ const TasksList = ({ userInfo, removeTask, handleMarkAsDone }) => {
         <h4 className="text-2xl font-thin text-gray-800">
           Task Assigned by Me
         </h4>
-        <div className="grid gap-4 sm:table sm:max-h-80 sm:overflow-x-auto sm:rounded-lg mt-2">
-          {filteredAssignedByMe.length > 0 ? (
-            filteredAssignedByMe.map((task) => (
-              <div
-                key={task._id}
-                className="bg-gray-100 p-4 rounded-lg shadow-md sm:table-row sm:table-auto sm:p-0"
-              >
-                <div className="flex sm:table-cell flex-col sm:flex-row sm:items-center sm:gap-4">
-                  <div className="text-lg font-medium sm:table-cell">
-                    {task.taskdata}
-                  </div>
-                  <div className="text-gray-600 sm:table-cell">
-                    Assigned To: {task.assignedto}
-                  </div>
-                  <div className="sm:table-cell">
-                    <span
-                      className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                        task.status === "Done"
-                          ? "bg-green-500 text-white"
-                          : task.status === "Delayed"
-                          ? "bg-red-500 text-white"
-                          : "bg-yellow-500 text-white"
-                      }`}
-                    >
-                      {task.status}
-                    </span>
-                  </div>
-                  <div className="text-gray-600 sm:table-cell">
-                    {new Date(task.deadline).toLocaleDateString()}
-                  </div>
-                  <div className="flex gap-2 sm:table-cell sm:text-center">
-                    {task.assignedby === userInfo.email && (
-                      <button
-                        className="text-red-600 hover:text-red-800 transition-all duration-300"
-                        onClick={() => handleRemoveTask(task._id)}
+        <div className="overflow-x-auto max-h-[42vh] rounded-lg mt-2">
+          <table className="min-w-full bg-white shadow-lg rounded-lg overflow-hidden table-auto">
+            <thead className="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
+              <tr>
+                <th className="px-6 py-3 text-left">Task</th>
+                <th className="px-6 py-3 text-left">Assigned To</th>
+                <th className="px-6 py-3 text-left">Status</th>
+                <th className="px-6 py-3 text-left">Deadline</th>
+                <th className="px-6 py-3 text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredAssignedByMe.length > 0 ? (
+                filteredAssignedByMe.map((task, index) => (
+                  <tr
+                    key={task._id}
+                    className={`${
+                      index % 2 === 0 ? "bg-gray-50" : "bg-gray-100"
+                    } hover:bg-gray-200 transition-all duration-300`}
+                  >
+                    <td className="px-6 py-4">{task.taskdata}</td>
+                    <td className="px-6 py-4">{task.assignedto}</td>
+                    <td className="px-6 py-4">
+                      <span
+                        className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                          task.status === "Done"
+                            ? "bg-green-500 text-white"
+                            : task.status === "Delayed"
+                            ? "bg-red-500 text-white"
+                            : "bg-yellow-500 text-white"
+                        }`}
                       >
-                        Remove Task
-                      </button>
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))
-          ) : (
-            <div className="text-center text-gray-600">
-              No tasks assigned by me.
-            </div>
-          )}
+                        {task.status}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4">
+                      {/* Show only date without time */}
+                      {new Date(task.deadline).toLocaleDateString()}
+                    </td>
+                    <td className="px-6 py-4 text-center">
+                      {/* Delete Button */}
+                      {task.assignedby === userInfo.email && (
+                        <button
+                          className="mt-2 text-red-600 hover:text-red-800 transition-all duration-300"
+                          onClick={() => handleRemoveTask(task._id)}
+                        >
+                          Remove Task
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td
+                    colSpan="5"
+                    className="px-6 py-4 text-center text-gray-600"
+                  >
+                    No tasks assigned by me.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
